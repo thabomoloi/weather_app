@@ -1,0 +1,19 @@
+{
+  "name": "weather_app",
+  "version": "1.0.0",
+  "description": "Building weather app front end using API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "API",
+    "Weather"
+  ],
+  "author": "Thabo Vincent Moloi",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}
