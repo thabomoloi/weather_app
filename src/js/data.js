@@ -30,10 +30,20 @@ function filterData(data) {
 
 async function getWeatherData(location) {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${getName(location)}&appid=f10b79e03b5de9d11241b8d0e6e46cd3`;
-    const response = await fetch(url, { mode: "cors" });
-    const weatherData = await response.json();
-    const data = filterData(weatherData);
-    return data;
+    try {
+        const response = await fetch(url, { mode: "cors" });
+        if (!response.ok) {
+            alert("City Not Found");
+            return null;
+        }
+        const weatherData = await response.json();
+        const data = filterData(weatherData);
+        return data;
+    }
+    catch (error) {
+        alert(error);
+        return null;
+    }
 }
 
 export default getWeatherData;
