@@ -1,9 +1,11 @@
 import Header from "./Header";
+import getWeatherData from "../data";
 
 class Main {
 
     constructor(data) {
 
+        this.unit = "C";
         this.header = new Header();
 
         const main = document.createElement("main");
@@ -14,15 +16,15 @@ class Main {
         // Info div: city name and weather description
         const infoDiv = document.createElement("div");
 
-        const cityName = document.createElement("h1");
-        cityName.innerText = data.name;
-        cityName.classList.add("city-name");
+        this.cityName = document.createElement("h1");
+        this.cityName.innerText = data.name + ", " + data.country;
+        this.cityName.classList.add("city-name");
 
         const description = document.createElement("p");
         description.innerText = data.description;
         description.classList.add("weather-condition");
 
-        infoDiv.append(cityName, description);
+        infoDiv.append(this.cityName, description);
 
         // Weather div
         const weatherDiv = document.createElement("div");
@@ -30,51 +32,74 @@ class Main {
         weatherImg.src = `https://openweathermap.org/img/wn/${data.icon}@4x.png`;
         weatherImg.classList.add("weather-icon");
 
-        const temperature = document.createElement("div");
-        temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
+        this.temperature = document.createElement("div");
+        this.temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
 
         const deg = document.createElement("div");
-        const degC = document.createElement("button");
-        degC.innerText = "°C";
-        degC.classList.add("display-deg");
+        this.degC = document.createElement("button");
+        this.degC.innerText = "°C";
+        this.degC.classList.add("display-deg");
 
-        const degF = document.createElement("button");
-        degF.innerText = "°F";
+        this.degF = document.createElement("button");
+        this.degF.innerText = "°F";
 
-        deg.append(degC, degF);
+        deg.append(this.degC, this.degF);
 
-        const details = document.createElement("div");
-        details.classList.add("weather-details");
-        details.innerHTML = `
+        this.details = document.createElement("div");
+        this.details.classList.add("weather-details");
+        this.details.innerHTML = `
             <p>Feels like: ${data.feelsLike.celsius}</p>
             <p>Humidty: ${data.humidity}</p>
             <p>Wind: ${data.windSpeed.kmph}</p>
         `;
 
-        degC.addEventListener("click", () => {
-            temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
-            details.innerHTML = `
+        this.degC.addEventListener("click", () => {
+            this.temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
+            this.details.innerHTML = `
                 <p>Feels like: ${data.feelsLike.celsius}</p>
                 <p>Humidty: ${data.humidity}</p>
                 <p>Wind: ${data.windSpeed.kmph}</p>
             `;
-            degF.classList.remove("display-deg");
-            degC.classList.add("display-deg");
+            this.degF.classList.remove("display-deg");
+            this.degC.classList.add("display-deg");
+            this.unit = "C";
         });
-        degF.addEventListener("click", () => {
-            temperature.innerHTML = `<span>${data.temp.fahrenheit}</span>`;
-            details.innerHTML = `
+        this.degF.addEventListener("click", () => {
+            this.temperature.innerHTML = `<span>${data.temp.fahrenheit}</span>`;
+            this.details.innerHTML = `
                 <p>Feels like: ${data.feelsLike.fahrenheit}</p>
                 <p>Humidty: ${data.humidity}</p>
                 <p>Wind: ${data.windSpeed.mph}</p>
             `;
-            degC.classList.remove("display-deg");
-            degF.classList.add("display-deg");
+            this.degC.classList.remove("display-deg");
+            this.degF.classList.add("display-deg");
+            this.unit = "F";
         });
 
-        weatherDiv.append(weatherImg, temperature, deg, details);
+        weatherDiv.append(weatherImg, this.temperature, deg, this.details);
         main.append(infoDiv, weatherDiv);
         document.querySelector("body")?.appendChild(main);
+
+    }
+    displayNewData(data) {
+        if (data) {
+            this.cityName.innerText = data.name + ", " + data.country;
+            if (this.degC.classList.contains("display-deg")) {
+                this.temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
+                this.details.innerHTML = `
+                    <p>Feels like: ${data.feelsLike.celsius}</p>
+                    <p>Humidty: ${data.humidity}</p>
+                    <p>Wind: ${data.windSpeed.kmph}</p>
+                `;
+            } else {
+                this.temperature.innerHTML = `<span>${data.temp.fahrenheit}</span>`;
+                this.details.innerHTML = `
+                    <p>Feels like: ${data.feelsLike.fahrenheit}</p>
+                    <p>Humidty: ${data.humidity}</p>
+                    <p>Wind: ${data.windSpeed.mph}</p>
+                `;
+            }
+        }
     }
 }
 
