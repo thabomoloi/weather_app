@@ -49,7 +49,6 @@ class Main {
             <p>Wind: ${windSpeed}</p>
         `;
         weatherDiv.append(weatherImg, temperature, deg, details);
-        alert("Hello");
         main.append(infoDiv, weatherDiv);
         document.querySelector("body")?.appendChild(main);
     }
