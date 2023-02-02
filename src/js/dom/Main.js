@@ -37,10 +37,11 @@ class Main {
         const deg = document.createElement("div");
         this.degC = document.createElement("button");
         this.degC.innerText = "°C";
-        this.degC.classList.add("display-deg");
+        this.degC.classList.add("display-deg", "deg-btn", "btn");
 
         this.degF = document.createElement("button");
         this.degF.innerText = "°F";
+        this.degF.classList.add("deg-btn", "btn");
 
         deg.append(this.degC, this.degF);
 
