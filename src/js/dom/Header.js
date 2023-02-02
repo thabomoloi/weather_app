@@ -15,7 +15,9 @@ class Header {
         this.searchDiv.append(this.searchInput, this.searchButton);
         this.header.appendChild(this.searchDiv);
 
-        document.querySelector("body")?.appendChild(this.header);
+        const body = document.querySelector("body")
+        body.innerHTML = "";
+        body?.appendChild(this.header);
     }
 }
 
