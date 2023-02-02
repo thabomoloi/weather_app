@@ -8,8 +8,13 @@ function getName(name) {
 }
 
 function filterData(data) {
+    const regionNames = new Intl.DisplayNames(
+        ['en'], {type: 'region'}
+      );
+    
     return {
         name: data.name,
+        country: regionNames.of(data.sys.country),
         icon: data.weather[0].icon,
         description: data.weather[0].description,
         temp: {
