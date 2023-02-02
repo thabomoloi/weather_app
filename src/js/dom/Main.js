@@ -20,7 +20,11 @@ class Main {
         this.cityName.classList.add("city-name");
 
         const description = document.createElement("p");
-        description.innerText = data.description;
+        description.innerText = ((str) => {
+            return str.charAt(0).toUpperCase() +
+                str.substring(1);
+
+        })(data.description);
         description.classList.add("weather-condition");
 
         infoDiv.append(this.cityName, description);
@@ -77,29 +81,13 @@ class Main {
         });
 
         weatherDiv.append(weatherImg, this.temperature, deg, this.details);
-        main.append(infoDiv, weatherDiv);
+        container.append(infoDiv, weatherDiv);
+        main.appendChild(container);
         document.querySelector("body")?.appendChild(main);
 
     }
     displayNewData(data) {
-        if (data) {
-            this.cityName.innerText = data.name + ", " + data.country;
-            if (this.degC.classList.contains("display-deg")) {
-                this.temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
-                this.details.innerHTML = `
-                    <p>Feels like: ${data.feelsLike.celsius}</p>
-                    <p>Humidty: ${data.humidity}</p>
-                    <p>Wind: ${data.windSpeed.kmph}</p>
-                `;
-            } else {
-                this.temperature.innerHTML = `<span>${data.temp.fahrenheit}</span>`;
-                this.details.innerHTML = `
-                    <p>Feels like: ${data.feelsLike.fahrenheit}</p>
-                    <p>Humidty: ${data.humidity}</p>
-                    <p>Wind: ${data.windSpeed.mph}</p>
-                `;
-            }
-        }
+        new Main(data);
     }
 }
 
