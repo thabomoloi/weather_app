@@ -14,6 +14,7 @@ class Main {
 
         // Info div: city name and weather description
         const infoDiv = document.createElement("div");
+        infoDiv.classList.add("info-container");
 
         this.cityName = document.createElement("h1");
         this.cityName.innerText = data.name + ", " + data.country;
@@ -30,15 +31,24 @@ class Main {
         infoDiv.append(this.cityName, description);
 
         // Weather div
+        const div1 = document.createElement("div");
+        div1.classList.add("temp-details");
+
         const weatherDiv = document.createElement("div");
+        weatherDiv.classList.add("weather-container");
+
         const weatherImg = document.createElement("img");
         weatherImg.src = `https://openweathermap.org/img/wn/${data.icon}@4x.png`;
         weatherImg.classList.add("weather-icon");
 
         this.temperature = document.createElement("div");
+        this.temperature.classList.add("temperature");
+
         this.temperature.innerHTML = `<span>${data.temp.celsius}</span>`;
+        div1.append(weatherImg, this.temperature);
 
         const deg = document.createElement("div");
+        deg.classList.add("unit-buttons");
         this.degC = document.createElement("button");
         this.degC.innerText = "°C";
         this.degC.classList.add("display-deg", "deg-btn", "btn");
@@ -47,8 +57,10 @@ class Main {
         this.degF.innerText = "°F";
         this.degF.classList.add("deg-btn", "btn");
 
-        deg.append(this.degC, this.degF);
-
+        const div2 = document.createElement("div");
+        div2.append(this.degC, this.degF);
+        deg.append(div2, document.createElement("div"));
+        div1.appendChild(deg);
         this.details = document.createElement("div");
         this.details.classList.add("weather-details");
         this.details.innerHTML = `
@@ -66,7 +78,6 @@ class Main {
             `;
             this.degF.classList.remove("display-deg");
             this.degC.classList.add("display-deg");
-            this.unit = "C";
         });
         this.degF.addEventListener("click", () => {
             this.temperature.innerHTML = `<span>${data.temp.fahrenheit}</span>`;
@@ -77,17 +88,13 @@ class Main {
             `;
             this.degC.classList.remove("display-deg");
             this.degF.classList.add("display-deg");
-            this.unit = "F";
         });
 
-        weatherDiv.append(weatherImg, this.temperature, deg, this.details);
+        weatherDiv.append(div1, this.details);
         container.append(infoDiv, weatherDiv);
         main.appendChild(container);
         document.querySelector("body")?.appendChild(main);
 
-    }
-    displayNewData(data) {
-        new Main(data);
     }
 }
 
