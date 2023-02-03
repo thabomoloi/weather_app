@@ -1,0 +1,109 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    background: url(../images/background.jpg) no-repeat center center fixed;;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    font-family: 'Fira Sans', sans-serif;
+}
+header {
+    padding: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0c4a6ed5;
+    box-shadow: 0px 0px 4px 5px rgba(0, 0, 0, 0.5);
+    font-size: 1em;
+}
+button.btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+}
+input.city-search{
+    font-size: inherit;
+    padding: 10px 10px;
+    border: none;
+    font-family: inherit;
+}
+input.city-search:focus{
+    outline-color: #881337;
+}
+button.btn-search {
+    font-size: inherit;
+    font-weight: 600;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0;
+    background-color: #881337;
+    color: white;
+}
+
+header div {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 2em;
+}
+.container {
+    background-color: #0c4a6e88;
+    color: white;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.75);
+}
+.container h1,
+.weather-condition {
+    margin: 0;
+}
+.weather-condition {
+    font-size: 1.2em;
+}
+.container img {
+    width: 128px;
+    height: 128px;
+    object-fit: none;
+}
+.weather-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.temp-details {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+.temperature,
+.unit-buttons {
+    font-size: 72px;
+}
+.unit-buttons button {
+    font-size: 20px;
+}
+.unit-buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+.deg-btn {
+    color: rgb(129, 129, 129);
+}
+button.display-deg {
+    color: white;
+}
+.weather-details {
+    padding: 0 1.5em;
+}
