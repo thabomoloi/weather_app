@@ -9,17 +9,17 @@ function getName(name) {
 
 function filterData(data) {
     const regionNames = new Intl.DisplayNames(
-        ['en'], {type: 'region'}
-      );
-    
+        ['en'], { type: 'region' }
+    );
+
     return {
         name: data.name,
         country: regionNames.of(data.sys.country),
         icon: data.weather[0].icon,
         description: data.weather[0].description,
         temp: {
-            celsius: kelvinToCelsius(data.main.temp) + "°C",
-            fahrenheit: kelvinToFahrenheit(data.main.temp) + "°F"
+            celsius: kelvinToCelsius(data.main.temp),
+            fahrenheit: kelvinToFahrenheit(data.main.temp)
         },
         feelsLike: {
             celsius: kelvinToCelsius(data.main.feels_like) + "°C",
